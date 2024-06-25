@@ -275,69 +275,10 @@ table td{
     cursor:pointer;
     background-color: #AABAFF !important;
 }
-
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-
-
-/*STYLE*/
-@font-face{
-    font-family: 'Poppins-Medium';
-    src: url('Poppins-Medium.woff')
-}
 select option,.container div,.display,h1{
     text-align: center;
 }
-:root{
-    background-color: darkslateblue;
-    font-family: 'Poppins-Medium';
-}
+
 
 h1.top{
     font-weight: bold;
@@ -354,13 +295,8 @@ h1.top{
     color: white;
     gap: 1.4rem;
 }
-h1 img{
-    width: 4.2rem;
-}
-h1 span{
-    font-size: 1.6rem;
-    padding: .3rem 0;
-}
+
+
 h1 .select{
     width: 100%;
     padding: .8rem 0;
@@ -467,6 +403,28 @@ h1 label{
 .search-city::placeholder{
     color: rgba(0,0,0,.1);
     font-family: Arial;
+}
+.my-5 {
+    margin-top: 4rem !important;
+    margin-bottom: 4rem !important
+}
+.row {
+    --tblr-gutter-x: var(--tblr-content-padding);
+    --tblr-gutter-y: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(-1 * var(--tblr-gutter-y));
+    margin-right: calc(-.5 * var(--tblr-gutter-x));
+    margin-left: calc(-.5 * var(--tblr-gutter-x))
+}
+
+.row>* {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    padding-right: calc(var(--tblr-gutter-x) * .5);
+    padding-left: calc(var(--tblr-gutter-x) * .5);
+    margin-top: var(--tblr-gutter-y)
 }	
 </style>
 </head>
@@ -478,7 +436,8 @@ h1 label{
         <label id="tgl"></label>
         <div id="h1kota" class="select"></div>
     </h1>
-    <div class="container">
+    <div class="my-5">
+	<div class="row">    
         <div class="imsak">
             <p>
                 IMSAK
@@ -522,7 +481,7 @@ h1 label{
             <p></p>
         </div>
         <p class="display"></p>
-    </div>
+    </div></div>div>
 
 	
 <script src="/main.js"></script>	
