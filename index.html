@@ -284,130 +284,255 @@ p.m-date{
 }
 </style>
 </head>
-
-	 <!-- Waktu Sholat -->
-  <div class="container">
-        <div class="card">
-            <p class="text-end"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
-                </svg> 
-            <span class="judul-kota">Batam</span>
-            </p>
-            <div class="input-group mb-3">
-                <input type="text" class="form-control input-search" placeholder="Cari Kota....">
+<link rel="stylesheet" href="https://kenthusblog.github.io/blogger/tabel.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <section class="my-5">
+      <div class="container">
+        <div x-data="jadwalSholat()" x-init="connect()">
+          <template x-if="loading">
+            <!-- Loading spinner template -->
+            <div class="loading-spinner">
+              <h2 class="text-center mb-3">Loading Content</h2>
+              <div class="space-x justify-content-center">
+                <div class="spinner-grow text-islamic" role="status"></div>
+                <div class="spinner-grow text-islamic" role="status"></div>
+                <div class="spinner-grow text-islamic" role="status"></div>
+                <div class="spinner-grow text-islamic" role="status"></div>
+                <div class="spinner-grow text-islamic" role="status"></div>
+                <div class="spinner-grow text-islamic" role="status"></div>
+              </div>
             </div>
-            <div class="list-group card-list hidden-list mb-4">
+          </template>
+          <template x-if="!loading">
+            <!-- Main content template -->
+            <div class="mb-3">
+              <div class="form-label"><h2 class="text-center mb-3">Pilih Wilayah Kab/Kota</h2></div>
+              <input type="text" class="form-control shadow border-wide cursor-pointer" x-model="search"
+                placeholder="Cari Kab/Kota" @click="showAllCities = true" @click.outside="showAllCities = false"
+                @keydown.arrow-down.prevent="navigateDropdown('down')"
+                @keydown.arrow-up.prevent="navigateDropdown('up')" @keydown.enter.prevent="selectCityFromKeyboard">
+              <div x-show="showAllCities" class="dropdown shadow">
+                <div class="dropdown-menu show" style="width: 100%;">
+                  <div x-show="displayNotFound()" class="dropdown-item">No cities found</div>
+                  <template x-for="(city, index) in filteredCities" :key="city.id">
+                    <div @click="selectCity(city.id, city.lokasi)" class="dropdown-item cursor-pointer select-jadwal"
+                      x-text="city.lokasi" :class="{ 'active': index === selectedIndex }"></div>
+                  </template>
+                </div>
+              </div>
+
+
+              <div class="mt-4">
+                <!-- loading lokasi & jadwal sholat -->
+                <template x-if="loadingJadwal" >
+                  <h2 class="text-center mb-3"></h2>
+                </template>
+                <template x-if="!loadingJadwal">
+                  <div class="my-5 text-black">
+                    <div class="text-center mb-4">
+                      <h2 x-text="lokasi" class="text-center mb-3 heading-city-text"></h2>
+                      <span x-text="formattedDateMonth" style="font-size: 16px;"></span>
+                    </div>
+                    <div class="card py-3 mt-3 mb-5 shadow-lg rounded-3">
+                      <div class="row">
+                        <div class="col-6 col-lg-2 text-center my-2 my-lg-0 border-end">
+                          <p class="mb-1 text-islamic fw-semibold">Imsak</p>
+                          <p class="mb-0" x-text="jadwalToday[0].imsak"></p>
+                        </div>
+                        <div class="col-6 col-lg-2 text-center my-2 my-lg-0 border-x ">
+                          <p class="mb-1 text-islamic fw-semibold">Subuh</p>
+                          <p class="mb-0" x-text="jadwalToday[0].subuh"></p>
+                        </div>
+                        <div class="col-6 col-lg-2 text-center my-2 my-lg-0 border-x ">
+                          <p class="mb-1 text-islamic fw-semibold">Dzuhur</p>
+                          <p class="mb-0" x-text="jadwalToday[0].dzuhur"></p>
+                        </div>
+                        <div class="col-6 col-lg-2 text-center my-2 my-lg-0 border-x ">
+                          <p class="mb-1 text-islamic fw-semibold">Ashar</p>
+                          <p class="mb-0" x-text="jadwalToday[0].ashar"></p>
+                        </div>
+                        <div class="col-6 col-lg-2 text-center my-2 my-lg-0 border-x ">
+                          <p class="mb-1 text-islamic fw-semibold">Maghrib</p>
+                          <p class="mb-0" x-text="jadwalToday[0].maghrib"></p>
+                        </div>
+                        <div class="col-6 col-lg-2 text-center my-2 my-lg-0 border-start">
+                          <p class="mb-1 text-islamic fw-semibold">Isya</p>
+                          <p class="mb-0" x-text="jadwalToday[0].isya"></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="text-center mb-4 mt-5">
+                      <h2 class="text-center mb-3 heading-city-text">Jadwal 1 Bulan untuk  <span x-text="lokasi" class="text-center mb-3 heading-city-text"></span> <span x-text="formattedbulan"></span></h2>
+                    </div>
+                    <div class="table-responsive bg-white shadow ">
+                      <table class="table table-vcenter table-bordered border-dark">
+                        <thead>
+                          <tr>
+                            <th class="bg-islamic text-black" style="font-size: 15px;">Tanggal</th>
+                            <th class="bg-islamic text-black" style="font-size: 15px;">Imsak</th>
+                            <th class="bg-islamic text-black" style="font-size: 15px;">Subuh</th>
+                            <th class="bg-islamic text-black" style="font-size: 15px;">Terbit</th>
+                            <th class="bg-islamic text-black" style="font-size: 15px;">Dhuha</th>
+                            <th class="bg-islamic text-black" style="font-size: 15px;">Dzuhur</th>
+                            <th class="bg-islamic text-black" style="font-size: 15px;">Ashar</th>
+                            <th class="bg-islamic text-black" style="font-size: 15px;">Maghrib</th>
+                            <th class="bg-islamic text-black" style="font-size: 15px;">Isya</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <template x-for="jadwal in jadwalSholat" :key="jadwal.date">
+                            <tr>
+                              <td x-text="formatedDateByMonth(jadwal.tanggal)"></td>
+                              <td x-text="jadwal.imsak"></td>
+                              <td x-text="jadwal.subuh"></td>
+                              <td x-text="jadwal.terbit"></td>
+                              <td x-text="jadwal.dhuha"></td>
+                              <td x-text="jadwal.dzuhur"></td>
+                              <td x-text="jadwal.ashar"></td>
+                              <td x-text="jadwal.maghrib"></td>
+                              <td x-text="jadwal.isya"></td>
+                            </tr>
+                          </template>
+                        </tbody>
+                      </table>                 
+                      </div>
+                  </div>
+                </template>
+              </div>
             </div>
-        </div>
-    </div>
-
-
-		<div class="card">
-      <div class="card-head">
-          <p style="font-weight: 600;">Jadwal Sholat Untuk Daerah 
-          <b><span style="display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center; cursor:
-            pointer;" data-bs-toggle="modal" data-bs-target="#daftarKota">
-            <span class="kota-pilihan" style="color: #ff0606; font-weight: 600;"></span> <span class="fa fa-sort-desc"></span>           
-			  </span></b></p>
-		 <div class="no-margin"> 
-        <div class="tanggal-wrapper" style="display: flex; justify-content: center; align-items: center;">
-		<div class="col-s4">	
-          <button class="prev-date btn-arr" style="cursor: pointer;"><i class="material-icons">chevron_left</i></button>
-			</div>	
-          <div class="tanggal mx-4">
-            <span class="masehi mb-1" ></span>
-			  <!--<p class="hijriyah" style="opacity: .6;"></p>-->
-          </div>
-		<div class="col-s4">	
-          <button class="next-date btn-arr" style="cursor: pointer;"><i class="material-icons">chevron_right</i></button>
-			</div>
-		</div>
-      </div>
-		</div>
-		
-		
-		<div class="card-sholat">
-		<table class="cal_table" border="1">
-		<tbody>	     
-          <td><div class="jadwal imsak row p-3">
-            <div class="col-6 px-0 px-md-2 px-lg-0">
-              <h5 class="m-0">Imsak</h5>
-              <h4 class="waktu m-0" style="font-weight: 700;">-</h4>
-            </div>            
-			  </div></td>
-			<td><div class="jadwal subuh row p-3">
-            <div class="col-6 px-0 px-md-2 px-lg-0">
-              <h5 class="m-0">Subuh</h5>
-                <h4 class="waktu m-0" style="font-weight: 700;">-</h4>
-            </div>            
-				</div></td>
-          <td><div class="jadwal terbit row p-3">
-            <div class="col-6 px-0 px-md-2 px-lg-0">
-              <h5 class="m-0">Terbit</h5>
-              <h4 class="waktu m-0" style="font-weight: 700;">-</h4>
-            </div>           
-          </div></td>
-          <td><div class="jadwal dhuha row p-3">
-            <div class="col-6 px-0 px-md-2 px-lg-0">
-              <h5 class="m-0">Dhuha</h5>
-              <h4 class="waktu m-0" style="font-weight: 700;">-</h4>
-            </div>            
-          </div></td>
-          <td><div class="jadwal dzuhur row p-3">
-            <div class="col-6 px-0 px-md-2 px-lg-0">
-              <h5 class="m-0">Dzuhur</h5>
-              <h4 class="waktu m-0" style="font-weight: 700;">-</h4>
-            </div>            
-          </div></td>
-          <td><div class="jadwal ashar row p-3">
-            <div class="col-6 px-0 px-md-2 px-lg-0">
-              <h5 class="m-0">Ashar</h5>
-              <h4 class="waktu m-0" style="font-weight: 700;">-</h4>
-            </div>            
-          </div></td>
-          <td><div class="jadwal maghrib row p-3">
-            <div class="col-6 px-0 px-md-2 px-lg-0">
-              <h5 class="m-0">Maghrib</h5>
-              <h4 class="waktu m-0" style="font-weight: 700;">-</h4>
-            </div>            
-          </div></td>
-          <td><div class="jadwal isya row p-3">
-            <div class="col-6 px-0 px-md-2 px-lg-0">
-              <h5 class="m-0">Isya'</h5>
-              <h4 class="waktu m-0" style="font-weight: 700;">-</h4>
-            </div>            
-          </div></td> 									
-					</tbody>
-			</table></div></div>	  
-	  
-
-  <!-- Modal Waktu Sholat -->
-  <div class="modal fade" id="daftarKota" tabindex="-1" aria-labelledby="daftarKotaLabel" aria-hidden="true"
-    style="color: var(--blue2);">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="daftarKotaLabel">Daftar Kota</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div id="daftar-kota" class="modal-body daftar-kota">
-          <div class="input-kota fuzzy-search mb-3">
-            <input class="px-3 py-2 input-group" type="text" onclick="this.select()"
-              style="background-color: var(--white); border: 1px solid var(--blue1); border-radius: 3px;"
-              placeholder="Cari Nama Kota / Daerah...">
-          </div>
-          <div class="daftar list px-2" style="letter-spacing: 1px; max-height: 40vh; overflow: auto;"></div>
+          </template>
         </div>
       </div>
-    </div>
-  </div>	
- <!-- End Waktu Sholat -->
-<script src="/hijriyah/sholat/list.js"></script>
-<script src="/hijriyah/sholat/hijri-date.js"></script>
-<script src="/hijriyah/sholat/calendar.js"></script>
-<script src="/jual-hijriyah/index.js"></script>
-<script src="/jual-hijriyah/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+      </section>
+
+
+  <script>
+    // get api from https://api.myquran.com/v2/sholat/kota/cari/{nama_kota}
+    var getYearNumber = new Date().getFullYear().toString();
+    var getMonth = new Date().getMonth() + 1;
+    var monthZero = getMonth.toString().padStart(2, '0');
+
+    // Get current date
+    let currentDate = new Date();
+    const daysOfWeek = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+    const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
+    // Format date Selasa, 02/04/2024
+    let formattedDate = `${daysOfWeek[currentDate.getDay()]}, ${currentDate.getDate().toString().padStart(2, '0')}/${(currentDate.getMonth() + 1).toString().padStart(2, '0')}/${currentDate.getFullYear()}`;
+    // format date Senin, 22 April 2024
+    let formattedDateMonth = `${daysOfWeek[currentDate.getDay()]}, ${currentDate.getDate()} ${months[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
+     let formattedbulan = `${months[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
+    
+
+
+    function jadwalSholat() {
+      return {
+        allCity: [],
+        jadwalSholat: [],
+        jadwalToday: [],
+        loading: true,
+        loadingJadwal: true,
+        lokasi: '',
+        search: '',
+        selectedCity: '',
+        showAllCities: false,
+        selectedIndex: -1,
+        formattedDateMonth: formattedDateMonth,
+        connect() {
+          fetch('https://api.myquran.com/v2/sholat/kota/semua')
+            .then(response => response.json())
+            .then(data => {
+              this.allCity = data.data;
+              this.loading = false;
+            })
+            .catch(error => {
+              console.error('Error fetching data:', error);
+              this.loading = false;
+            });
+        },
+        jadwal(id) {
+          this.loadingJadwal = true;
+          fetch(`https://api.myquran.com/v2/sholat/jadwal/${id}/${getYearNumber}/${monthZero}`)
+            .then(response => response.json())
+            .then(data => {
+              this.jadwalSholat = data.data.jadwal;
+              this.lokasi = data.data.lokasi;
+              this.jadwalToday = data.data.jadwal.filter(jadwal => jadwal.tanggal === formattedDate);
+              console.log(this.jadwalToday[0].imsak);
+              this.loadingJadwal = false;
+              console.log(this.lokasi);
+            })
+            .catch(error => {
+              console.error('Error fetching data:', error);
+              this.loadingJadwal = false;
+            });
+        },
+        filteredCities() {
+          return this.allCity.filter(city => {
+            return city.lokasi.toLowerCase().includes(this.search.toLowerCase());
+          });
+        },
+        navigateDropdown(direction) {
+          const cities = this.filteredCities();
+          if (cities.length === 0) return;
+          if (direction === 'down') {
+            this.selectedIndex = (this.selectedIndex + 1) % cities.length;
+          } else if (direction === 'up') {
+            this.selectedIndex = this.selectedIndex > 0 ? this.selectedIndex - 1 : cities.length - 1;
+          }
+        },
+        selectCityFromKeyboard() {
+          const cities = this.filteredCities();
+          if (this.selectedIndex >= 0 && this.selectedIndex < cities.length) {
+            const selectedCity = cities[this.selectedIndex];
+            this.selectCity(selectedCity.id, selectedCity.lokasi);
+          }
+        },
+        selectCity(id, lokasi) {
+          this.showAllCities = false;
+          this.search = lokasi;
+          this.selectedIndex = -1; // Reset selectedIndex after selecting a city
+          this.jadwal(id);
+        },
+        displayNotFound() {
+          return this.filteredCities().length === 0;
+        },
+        formatedDateByMonth(text) {
+          // Given string
+          var dateString = text;
+
+          // Function to convert month number to month name
+          function getMonthName(month) {
+            var months = [
+              "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+              "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+            ];
+            return months[month];
+          }
+
+          // Split the date string
+          var parts = dateString.split(", ");
+          var dateParts = parts[1].split("/");
+          var day = parseInt(dateParts[0]);
+          var month = parseInt(dateParts[1]) - 1; // Subtract 1 as month in Date object starts from 0
+          var year = parseInt(dateParts[2]);
+
+          // Create Date object
+          var date = new Date(year, month, day);
+
+          // Format the date
+          var formattedDate = parts[0] + ", " + day + " " + getMonthName(month) + " " + year;
+
+          return formattedDate;
+
+        }
+
+      }
+    }
+
+  </script>
 	
 	
 <script type="text/javascript">
