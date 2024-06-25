@@ -275,6 +275,199 @@ table td{
     cursor:pointer;
     background-color: #AABAFF !important;
 }
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+/*STYLE*/
+@font-face{
+    font-family: 'Poppins-Medium';
+    src: url('Poppins-Medium.woff')
+}
+select option,.container div,.display,h1{
+    text-align: center;
+}
+:root{
+    background-color: darkslateblue;
+    font-family: 'Poppins-Medium';
+}
+
+h1.top{
+    font-weight: bold;
+    font-family: inherit;
+    font-size: 1.2rem;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.top .brand{
+    display: flex;
+    align-items: center;
+    color: white;
+    gap: 1.4rem;
+}
+h1 img{
+    width: 4.2rem;
+}
+h1 span{
+    font-size: 1.6rem;
+    padding: .3rem 0;
+}
+h1 .select{
+    width: 100%;
+    padding: .8rem 0;
+    background-color: white;
+    color: darkslateblue;
+    border: none;
+    outline: none;
+    font-size: .9rem;
+    border-radius: 2px;
+    margin-top: 1.2rem;
+    cursor: pointer;
+}
+h1 label{
+    color: #ff5555;
+    font-size: .58rem;
+}
+.container{
+    font-weight: bold;
+    padding: 18px;
+    color: white;
+}
+.container > div{
+    display: flex;
+    gap: 8px;
+    padding: 9px;
+    border-radius: 9px;
+    margin: 4px 0;
+    justify-content: center;
+    font-family: inherit;
+}
+.container > div :first-child,.container > div :last-child{
+    width: 90px;
+}
+.display{
+    margin: 1.45rem auto;
+    padding: .9rem;
+    background: white;
+    color: darkslateblue;
+    width: max-content;
+    max-width: 94%;
+    border-radius: 4px;
+}
+.select-city-container{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0,0,0,.5);
+}
+.select-city{
+    position: absolute;
+    top: 1.2rem;
+    bottom: 1.2rem;
+    background: #fff;
+    right: 1.3rem;
+    left: 1.3rem;
+    border-radius: 1.6px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 2px;
+    overflow-x: scroll;
+    padding-top: 3rem;
+    font-family: 'Poppins-Medium';
+}
+.select-city > p{
+    border-bottom: .4px solid rgba(0,0,0,.1.8);
+    padding: .5rem;
+    border-radius: .2rem;
+    color: darkslateblue;
+}
+.select-city > p:active{
+    background: darkslateblue;
+    color: white;
+}
+.search-city{
+    position: relative;
+    top: .35rem;
+    z-index: 3;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    border: 4px solid darkslateblue;
+    outline: none;
+    padding: 6px;
+    border-radius: 7px;
+    color: gray;
+    font-family: 'Poppins-Medium';
+    max-width: 200px;
+}
+.btn-close{
+    position: absolute;
+    top: .7rem;
+    right: .9rem;
+    z-index: 3;
+    color: red;
+    font-size: 2rem;
+    background-color: white;
+    padding: .3rem;
+    border-radius: 50%
+}
+.search-city::placeholder{
+    color: rgba(0,0,0,.1);
+    font-family: Arial;
+}	
 </style>
 </head>
  <h1 class="top" id="top">
