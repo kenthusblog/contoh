@@ -1,7 +1,7 @@
 //VARIABEL
 const Variabel_element = {
-    getTimeHtml: document.querySelectorAll('.container div :nth-child(2)'),
-    getTrHtml: document.querySelectorAll('.container > div'),
+    getTimeHtml: document.querySelectorAll('.my-5 :nth-child(2)'),
+    getTrHtml: document.querySelectorAll('.my-5 > div'),
     labelTanggal: document.getElementById('tgl'),
     display: document.querySelector('.display'),
     kota: document.getElementById('h1kota'),
