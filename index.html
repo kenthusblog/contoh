@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Kalender Hijriyah Terlengkap</title>
+<script type="text/javascript" src="js/hari_libur.js"></script>
+<script type="text/javascript" src="js/HijriJs.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+
+<style>
+.wk{
+    margin: 0;
+}
+.card-head h2{
+	color: white;
+    font-weight: normal;
+    font-size: 120%;
+    margin: 0;
+}
+
+.kalender{
+	margin-left: -20px;
+    margin-right: -20px;
+}
+.card{
+    padding: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 13px 1px rgba(0,0,0,0.29);
+    -moz-box-shadow: 0px 0px 13px 1px rgba(0,0,0,0.29);
+    box-shadow: 0px 0px 13px 1px rgba(0,0,0,0.29);
+    margin-bottom: 5px;
+}
+.col-s3{
+	display: inline-block;
+}
+.col-s6{
+    margin-top: 5px;
+    display: inline-block;
+    width: 49%;
+}
+.col-s8{
+    margin-top: 5px;
+    display: inline-block;
+    width: 66%;
+}
+.col-s4{
+    margin-top: 5px;
+    display: inline-block;
+    width: 23%;
+}
+.btn-arr{
+	background-color: #fc5c65;
+    border: 1px solid #FFFFFF;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 5px;
+    border-radius: 50%;
+    width: 40px;
+	height: 35px;
+	cursor:pointer;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+}
+.btn-arr:hover{
+	background-color: #7b1b20;
+	color: #FFF001;
+}
+.material-icons{
+    position: absolute;
+    margin-top: -12px;
+    margin-left: -11px;
+}
+.card-tabs{
+    color: white;
+    text-align: left;
+    font-size: 90%;
+    padding: 15px 0px;
+    background-color: #2D36F6;
+    margin-left: -10px;
+    margin-right: -10px;
+    margin-top: 10px;
+    padding-left: 10px;
+}
+table.cal_table{
+	border-collapse: collapse;
+	width:100%;
+}
+table td:hover{
+    background-color: #ddd !important;;
+    cursor:pointer;
+}
+table, th, td {
+	text-align:center !important;
+	color: #37474f;
+	padding: 7px 5px;
+}
+
+table.cal_table > tbody > tr > td:hover {
+	background-color: #fafafa;
+}
+th.day{
+	color: #2196f3;
+}
+div.card-head{
+	border-radius: 2px 2px 0px 0px;
+    text-align: center;
+    padding: 15px 0px; 
+    color: white;
+	background-color: #2D36F6;
+    margin-top: -10px;
+    margin-left: -10px;
+    margin-right: -10px;
+    border-radius: 10px 10px 0px 0px;
+}
+div.card-head .card-title{
+	font-size:20px;
+}
+div.no-margin{
+	margin-bottom: 0px;
+	display: block;
+}
+
+span.det{
+	display:none; 
+}
+p.h-date{
+	font-size:20px;
+	margin: auto;
+	font-family: 'Amiri', serif !important;
+	margin: 0px 5px;
+}
+p.m-date{
+	font-size: 180%;
+    font-weight: bold;
+	margin: auto;
+}
+#setbulan{
+	text-align: center;
+    font-size: 90%;
+    padding: 15px 0px;
+    background-color: #E7E8FF;
+    margin-left: -10px;
+    margin-right: -10px;
+    margin-bottom: 10px;
+}
+
+.list{
+    padding: 5px 10px;
+    background: #efefef;
+    margin-bottom: 5px;
+}
+
+.col-0 .m-date{
+	color: #f44336;
+}
+
+.col-5 .m-date{
+	color: #4caf50;
+}
+
+#output_primwuku img{
+	width:100%;
+}
+#output_primwuku p span{
+	font-weight:bold;
+}
+.collection{
+    margin-top:10px !important;
+}
+#go_year{
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    color: black !important;
+}
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 90%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#sc{
+    font-size: 80%;
+    text-align:center;
+    margin: 15px 0px;
+}
+@media only screen and (max-width: 600px) {
+    table.cal_table {
+        font-size:80%;
+    }   
+}
+@media only screen and (max-width: 400px) {
+    table.cal_table {
+        font-size:70%;
+    }  
+    table td{
+        padding: 8px 0px;
+    }
+	.btn-arr{
+		width:30px;
+		height:30px;
+	}
+}
+
+.loncat {
+        display: flex;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        margin-top: 10px;
+        justify-content: space-between;
+	    border-color:#ff0016;
+	    color: black;
+    }
+
+.loncat li {
+        flex: 1;
+        padding: 5px;
+		border-color:#efefef;
+    }
+
+.loncat li:last-child {
+        flex: 0.2;
+		border-color:#efefef;
+    }
+
+.loncat select {
+        width: 100%;
+		height: 100%;
+		text-align: center;
+		background-color: #efefef;
+		border: 1px solid #2D36F6;
+	    cursor:pointer;
+	}	
+	
+.btn-loncat-date{
+	border: 1px solid #2D36F6;
+    padding: 10px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+	cursor:pointer;
+	background-color: #AABAFF !important;
+}
+</style>
+</head>
+
+	 <!-- Waktu Sholat -->
+  <div class="container">
+        <div class="card">
+            <p class="text-end"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+                </svg> 
+            <span class="judul-kota">Batam</span>
+            </p>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control input-search" placeholder="Cari Kota....">
+            </div>
+            <div class="list-group card-list hidden-list mb-4">
+            </div>
+        </div>
+    </div>
+
+
+		<div class="card">
+      <div class="card-head">
+          <p style="font-weight: 600;">Jadwal Sholat Untuk Daerah 
+          <b><span style="display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center; cursor:
+            pointer;" data-bs-toggle="modal" data-bs-target="#daftarKota">
+            <span class="kota-pilihan" style="color: #ff0606; font-weight: 600;"></span> <span class="fa fa-sort-desc"></span>           
+			  </span></b></p>
+		 <div class="no-margin"> 
+        <div class="tanggal-wrapper" style="display: flex; justify-content: center; align-items: center;">
+		<div class="col-s4">	
+          <button class="prev-date btn-arr" style="cursor: pointer;"><i class="material-icons">chevron_left</i></button>
+			</div>	
+          <div class="tanggal mx-4">
+            <span class="masehi mb-1" ></span>
+			  <!--<p class="hijriyah" style="opacity: .6;"></p>-->
+          </div>
+		<div class="col-s4">	
+          <button class="next-date btn-arr" style="cursor: pointer;"><i class="material-icons">chevron_right</i></button>
+			</div>
+		</div>
+      </div>
+		</div>
+		
+		
+		<div class="card-sholat">
+		<table class="cal_table" border="1">
+		<tbody>	     
+          <td><div class="jadwal imsak row p-3">
+            <div class="col-6 px-0 px-md-2 px-lg-0">
+              <h5 class="m-0">Imsak</h5>
+              <h4 class="waktu m-0" style="font-weight: 700;">-</h4>
+            </div>            
+			  </div></td>
+			<td><div class="jadwal subuh row p-3">
+            <div class="col-6 px-0 px-md-2 px-lg-0">
+              <h5 class="m-0">Subuh</h5>
+                <h4 class="waktu m-0" style="font-weight: 700;">-</h4>
+            </div>            
+				</div></td>
+          <td><div class="jadwal terbit row p-3">
+            <div class="col-6 px-0 px-md-2 px-lg-0">
+              <h5 class="m-0">Terbit</h5>
+              <h4 class="waktu m-0" style="font-weight: 700;">-</h4>
+            </div>           
+          </div></td>
+          <td><div class="jadwal dhuha row p-3">
+            <div class="col-6 px-0 px-md-2 px-lg-0">
+              <h5 class="m-0">Dhuha</h5>
+              <h4 class="waktu m-0" style="font-weight: 700;">-</h4>
+            </div>            
+          </div></td>
+          <td><div class="jadwal dzuhur row p-3">
+            <div class="col-6 px-0 px-md-2 px-lg-0">
+              <h5 class="m-0">Dzuhur</h5>
+              <h4 class="waktu m-0" style="font-weight: 700;">-</h4>
+            </div>            
+          </div></td>
+          <td><div class="jadwal ashar row p-3">
+            <div class="col-6 px-0 px-md-2 px-lg-0">
+              <h5 class="m-0">Ashar</h5>
+              <h4 class="waktu m-0" style="font-weight: 700;">-</h4>
+            </div>            
+          </div></td>
+          <td><div class="jadwal maghrib row p-3">
+            <div class="col-6 px-0 px-md-2 px-lg-0">
+              <h5 class="m-0">Maghrib</h5>
+              <h4 class="waktu m-0" style="font-weight: 700;">-</h4>
+            </div>            
+          </div></td>
+          <td><div class="jadwal isya row p-3">
+            <div class="col-6 px-0 px-md-2 px-lg-0">
+              <h5 class="m-0">Isya'</h5>
+              <h4 class="waktu m-0" style="font-weight: 700;">-</h4>
+            </div>            
+          </div></td> 									
+					</tbody>
+			</table></div></div>	  
+	  
+
+  <!-- Modal Waktu Sholat -->
+  <div class="modal fade" id="daftarKota" tabindex="-1" aria-labelledby="daftarKotaLabel" aria-hidden="true"
+    style="color: var(--blue2);">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="daftarKotaLabel">Daftar Kota</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div id="daftar-kota" class="modal-body daftar-kota">
+          <div class="input-kota fuzzy-search mb-3">
+            <input class="px-3 py-2 input-group" type="text" onclick="this.select()"
+              style="background-color: var(--white); border: 1px solid var(--blue1); border-radius: 3px;"
+              placeholder="Cari Nama Kota / Daerah...">
+          </div>
+          <div class="daftar list px-2" style="letter-spacing: 1px; max-height: 40vh; overflow: auto;"></div>
+        </div>
+      </div>
+    </div>
+  </div>	
+ <!-- End Waktu Sholat -->
+<script src="/hijriyah/sholat/list.js"></script>
+<script src="/hijriyah/sholat/hijri-date.js"></script>
+<script src="/hijriyah/sholat/calendar.js"></script>
+<script src="/jual-hijriyah/index.js"></script>
+<script src="/jual-hijriyah/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+	
+	
+<script type="text/javascript">
+
+		var iTanggalM = 0;
+		var iTanggalH = 0;
+		var iBulanM = 0;
+		var iBulanH = 0;
+		var iTahunM = 0;
+		var iTahunH = 0;
+		var iTahunJ = 0;
+
+		function intPart(floatNum) {
+			return(floatNum<-0.0000001? Math.ceil(floatNum-0.0000001) : Math.floor(floatNum+0.0000001));
+		}
+
+		function hitung_Hijriah(d,m,y) {
+			mPart = (m-13)/12;
+			jd = intPart((1461*(y+4800+intPart(mPart)))/4)+
+			intPart((367*(m-1-12*(intPart(mPart))))/12)-
+			intPart((3*(intPart((y+4900+intPart(mPart))/100)))/4)+d-32075;
+			l = jd-1948440+10632;
+			n = intPart((l-1)/10631);
+			l = l-10631*n+354;
+			j = (intPart((10985-l)/5316))*(intPart((50*l)/17719))+(intPart(l/5670))*(intPart((43*l)/15238));
+			l = l-(intPart((30-j)/15))*(intPart((17719*j)/50))-(intPart(j/16))*(intPart((15238*j)/43))+29;
+			iBulanH = intPart((24*l)/709);
+			iTanggalH = l-intPart((709*iBulanH)/24);
+			
+			tambahan = 0;  // Tambahan adalah angká penyesuaian, biasanya -1,0,+1
+			
+			iTanggalH = iTanggalH + tambahan;
+			iTahunH = 30*n+j-30;
+			iBulanH -= 1;
+		}
+
+ 
+
+		function hitung_Tanggal(format) {
+			var namaBulanE = new Array( "January","February","March","April","May","June","July","August","September","October","November","December");
+			var namaBulanH = new Array( "Muharram","Safar","Rabi Al-Awwal","Rabi Al-Thani","Jumada Al-Ula","Jumada Al-Thani","Rajab","Shaban","Ramadan","Shawwal","Dhul Qada","Dhul Hijja");
+			var namaBulanI = new Array( "Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember");
+			var namaBulanHI = new Array( "Muharram","Safar","Rabi'ul Awal","Rabi'ul Akhir","Jumadil Awal","Jumadil Akhir","Rajab","Sya'ban","Ramadhan","Syawal","Dzul Qa'dah","Dzul Hijjah");
+			var namaBulanJ = new Array( "Suro","Sapar","Mulud","Ba'da Mulud","Jumadil Awal","Jumadil Akhir","Rejeb","Ruwah","Poso","Syawal","Dulkaidah","Besar");
+			var namaHariE = new Array("Thursday","Friday","Saturday","Sunday","Monday","Tuesday","Wednesday");
+			var namaHariH = new Array("Al-Hamis","Al-Jum'a","As-Sabt","Al-Ahad","Al-Itsnayna","Ats-Tsalatsa'","Al-Arba'a'");
+			var namaHariI = new Array("Kamis","Jumat","Sabtu","Ahad","Senin","Selasa","Rabu");
+			var namaHariJ = new Array("Wage","Kliwon","Legi","Pahing","Pon","Wage","Kliwon");
+
+			now = new Date(); 
+			iTanggalM = now.getDate();
+			iBulanM = now.getMonth();
+			iTahunM = now.getYear();
+			if(iTahunM<1900) { iTahunM += 1900 }; // Y2K
+			
+			hitung_Hijriah(iTanggalM,iBulanM,iTahunM);
+			hr = Date.UTC(iTahunM,iBulanM,iTanggalM,0,0,0)/1000/60/60/24;
+			
+			iTahunJ = iTahunH+512;
+			sHariE = namaHariE[hr%7];         
+			sHariH = "Yaum "+namaHariH[hr%7]; 
+			sHariI = namaHariI[hr%7];         
+			sHariJ = namaHariJ[hr%5];         
+			sBulanE = namaBulanE[iBulanM];    
+			sBulanH = namaBulanH[iBulanH];    
+			sBulanI = namaBulanI[iBulanM];    
+			sBulanHI = namaBulanHI[iBulanH]; 
+			sBulanJ = namaBulanJ[iBulanH];    
+			
+			
+			zTanggalM = iTanggalM<10? "0"+iTanggalM : iTanggalM; 
+          zTanggalH = iTanggalH<10? "0"+iTanggalH : iTanggalH; 
+			iBulanM += 1; 
+			iBulanH += 1; 
+			zBulanM = iBulanM<10? "0"+iBulanM : iBulanM; 
+			zBulanH = iBulanH<10? "0"+iBulanH : iBulanH; 
+
+			
+			switch(format) {
+				case 2 : { sDate = sHariE+", "+iTanggalM+" "+sBulanE+" "+iTahunM;break; }
+				case 3 : { sDate = sHariI+" "+sHariJ+", "+iTanggalM+" "+sBulanI+" "+iTahunM;break; }
+				case 4 : { sDate = sHariI+" "+sHariJ+", "+iTanggalH+" "+sBulanJ+" "+iTahunJ;break; }
+				case 5 : { sDate = sHariH+", "+iTanggalH+" "+sBulanH+" "+iTahunH+" H";break; }
+				case 6 : { sDate = sHariI+", "+iTanggalH+" "+sBulanHI+" "+iTahunH+" H";break; }
+				case 7 : { sDate = sHariI+" "+sHariJ+", "+iTanggalM+" "+sBulanI+" "+iTahunM+" / "+iTanggalH+" "+sBulanHI+" "+iTahunH+" H / "+iTanggalH+" "+sBulanJ+" "+iTahunJ+" J";break; }
+                case 11 : { sDate = iTanggalM+" "+sBulanI+" "+iTahunM+" ,"+sHariI+" "+sHariJ+" / "+iTanggalH+" "+sBulanHI+" "+iTahunH+" H / "+iTanggalH+" "+sBulanJ+" "+iTahunJ+" J";break; }
+                case 12 : { sDate = sHariI+" "+sHariJ+" ";break; }
+                case 13 : { sDate = iTanggalH+" "+sBulanHI+" "+iTahunH+" H";break; }
+                case 14 : { sDate = iTanggalH+" "+sBulanJ+" "+iTahunJ+" J";break; }
+                case 15 : { sDate = iTanggalM+" "+sBulanI+" "+iTahunM+" ";break; }
+				case 8 : { sDate = sHariE+" "+sHariJ+", "+iTanggalH+" "+sBulanJ+" "+iTahunJ;break; }
+				default : { sDate = sHariI+" "+sHariJ+", "+iTanggalM+" "+sBulanI+" "+iTahunM;break; }
+			}
+			return(sDate);
+		}
+
+		function tulis_Tanggal(format) {
+			sDate = hitung_Tanggal(format);
+			document.write(sDate);
+		}
+	</script>	
+<body>
+
+<div class="kalender_hariini">
+		<div class="card">
+			<div class="card-head">
+              <div id="hari_ini"><b>Kalender Hijriyah Hari Ini</b></div>		       
+         <div style="margin:0px">(Jam
+<span id="jam"></span>)
+            </div></div>
+			<div class="card-content">
+				<table class="cal_table" border="1">
+					<tbody>
+                      <tr>
+							<td>Masehi</td>
+							<td><script type="text/javascript">tulis_Tanggal(15);</script></td>
+						</tr>
+						<tr>
+							<td>Pasaran</td>
+							<td><script type="text/javascript">tulis_Tanggal(12);</script></td>
+						</tr>
+						<tr>
+							<td>Tahun Hijriyah</td>
+							<td><script type="text/javascript">tulis_Tanggal(13);</script></td>
+						</tr>
+						<tr>
+							<td>Tahun Jawa</td>
+							<td><script type="text/javascript">tulis_Tanggal(14);</script></td>
+						</tr>
+						<tr>							
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>	
+
+<div class="calender">
+			<div class="card">
+				<div class="card-head">
+					 <div class="no-margin">
+						<div class="col-s3">
+							<button onclick="prev_year()" class="btn-arr"><i class="material-icons">fast_rewind</i></button>
+							<button onclick="prev()" class="btn-arr"><i class="material-icons">chevron_left</i></button>
+						</div>
+						<div class="col-s6">
+							<span class="card-title"><span id='month'></span> <span id='year'></span></span>
+						</div>
+						<div class="col-s3">
+							<button onclick="next()" class="btn-arr"><i class="material-icons">chevron_right</i></button>
+							<button onclick="next_year()" class="btn-arr"><i class="material-icons">fast_forward</i></button>
+						</div>
+					</div>
+				</div>
+				<div id='setbulan'></div>
+				<div class="card-content" style="overflow:auto">
+					<div id="calendar" class="calendar-java">
+
+						<table class="cal_table tbl-hijr" border='1'>
+						  <tbody>
+							<tr class="row-days">
+								<th class="day" style="color: #f44336;">Min</th>
+								<th class="day">Sen</th>
+								<th class="day">Sel</th>
+								<th class="day">Rab</th>
+								<th class="day">Kam</th> 
+								<th class="day" style="color: #4caf50;">Jum</th>
+								<th class="day">Sab</th>
+							</tr>
+							<tr class="row-0">
+								<td onclick='detail(this)' class="col-0"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-1"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-2"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-3"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-4"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-5"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-6"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+							</tr>
+							<tr class="row-1">
+								<td onclick='detail(this)' class="col-0"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-1"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-2"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-3"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-4"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-5"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-6"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+							</tr>
+							<tr class="row-2">
+								<td onclick='detail(this)' class="col-0"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-1"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-2"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-3"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-4"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-5"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-6"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+							</tr>
+							<tr class="row-3">
+								<td onclick='detail(this)' class="col-0"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-1"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-2"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-3"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-4"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-5"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-6"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+							</tr>
+							<tr class="row-4">
+								<td onclick='detail(this)' class="col-0"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-1"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-2"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-3"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-4"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-5"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-6"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+							</tr>
+							<tr class="row-5">
+								<td onclick='detail(this)' class="col-0"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-1"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-2"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-3"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-4"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-5"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+								<td onclick='detail(this)' class="col-6"><p class="m-date"></p><p class="h-date"></p><span class='det'></span></td>
+							</tr>
+						  </tbody>
+						</table>
+					</div>
+				</div>
+				<div class="card-tabs">
+					Hari Libur
+				</div>
+				<div>
+					<div id="harilibur">
+						<ul class="collection">
+						</ul>
+					</div>
+				</div>
+				<div class="card-tabs">
+					Indikator Warna Puasa
+				</div>
+				<div>
+					<div id="puasa">
+						<ul class="collection">
+							<li class='collection-item'><span style="background:#ff9800">&nbsp;&nbsp;&nbsp;</span> Puasa Senin Kamis</li>
+							<li class='collection-item'><span style="background:#673ab7">&nbsp;&nbsp;&nbsp;</span> Puasa Ayyamul Bidh, tiga hari tiap pertengahan bulan hijriah (13, 14, 15)</li>
+							<li class='collection-item'><span style="background:#76ff03">&nbsp;&nbsp;&nbsp;</span> Puasa Ramadan</li>
+							<li class='collection-item'><span style="background:#64b5f6">&nbsp;&nbsp;&nbsp;</span> Puasa Arafah, tiap 9 dzulhijjah (bagi yang tidak menunaikan haji)</li>
+							<li class='collection-item'><span style="background:#f06292">&nbsp;&nbsp;&nbsp;</span> Puasa 'Asyura dan Tasu'a, tiap 10 muharram dan satu hari sebelum atau sesudahnya</li>
+							<li class='collection-item'><span style="background:#b71c1c">&nbsp;&nbsp;&nbsp;</span> Haram Berpuasa. Idul fitri, idul adha dan hari tasyrik (11, 12, 13 dzulhijjah)</li>
+						</ul>
+					</div>
+				</div>
+				
+			</div>
+	</div>
+	<div class="calender">
+			<div class="card">
+				<div class="card-head">
+					<span>Loncat ke</span>
+				</div>
+				<ul class="loncat">
+                    <li>
+                        <select name="lbulan" id="list-month">
+                         </select>
+                    </li>
+                    <li>
+						<select name="ltahun" id="list-year"></select>
+					</li>
+					<li> 
+						<button id='go_year' class="btn-loncat-date">LIHAT</button>
+					</li>
+				</ul>
+				</div>
+			</div>
+			<div id='sc'>Developed by <a href='#'>kenthus</a></div>
+
+<!-- Modal Structure -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+		<span class="close">&times;</span>
+		<p id='textmodal'></p>
+		<br>
+		<span id='wuku_hide' style='display:none'></span>
+		<div id="output_primwuku"></div>
+	</div>
+</div>
+
+<script>
+$("#see_more").click(function(){
+	$(this).parent().find("tr").show();
+	$(this).hide();
+});
+	
+for ( var w = 1975; w < 2051; w++ ){
+	$("#list-year").append("<option value='"+w+"'>"+w+"</option>");
+}
+</script>
+
+<script type="text/javascript">
+
+var bulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+
+for ( var i = 0; i < bulan.length; i++ ){
+	$("#list-month").append("<option value='"+i+"'>"+bulan[i]+"</option>");
+}
+	
+var hari = ["Minggu",	"Senin",	"Selasa",	"Rabu",	"Kamis",	"Jum'at",	"Sabtu"];
+
+var arabicNumbers = ['۰', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+
+function convertToArab(v){
+	var chars = v.split("");
+	for (var i = 0; i < chars.length; i++) {
+		if (/\d/.test(chars[i])) {
+			chars[i] = arabicNumbers[chars[i]];
+		}
+	}
+	return chars.join('');
+}
+
+	function generate_table(month_now, year_now) {
+	
+		$("#calendar").hide();
+		
+		$(".cal_table tbody tr td p").empty();
+		$(".cal_table tbody tr td span").empty();
+				
+		var hijri_month = ["Muharam", "Safar", "Rabiul awal", "Rabiul akhir", "Jumadil awal", "Jumadil akhir", "Rajab", "Syakban", "Ramadan", "Syawal", "Zulkaidah", "Zulhijah" ];
+		var java_months = ["Sura", "Sapar", "Mulud", "Bakda Mulud", "Jumadilawal", "Jumadilakir", "Rejeb", "Ruwah", "Pasa", "Sawal", "Sela", "Besar" ];
+		
+		var first_date = new Date(year_now, month_now, 1);
+		var last_date = new Date(year_now, month_now + 1, 0);
+
+		var title_hijr = document.querySelector("h2.title-hijr");
+		var first_h = HijriJS.gregorianToHijri(first_date.getFullYear(), (first_date.getMonth() + 1), first_date.getDate());
+		first_h = first_h.day  +' '+ hijri_month[first_h.month - 1]  +' '+ first_h.year + " H";
+		var last_h =  HijriJS.gregorianToHijri(last_date.getFullYear(), (last_date.getMonth() + 1), last_date.getDate());
+		last_h = last_h.day  +' '+ hijri_month[last_h.month - 1]  +' '+ last_h.year + " H";
+		
+		$("#harilibur .collection .collection-item").remove();
+		
+		$('.h-date').css({
+			'border-top' : '',
+			'padding-top' : ''
+		});	
+		
+		var max_date = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+		var no_date = 1;
+		var row_tbl = 0;
+		var col_tbl = first_date.getDay();
+		if (year_now % 4 == 0) {
+			max_date = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+		}
+		for (var i = 0; i < 6; i++) {
+			for (var j = 0; j < 8; j++) {									
+					if (no_date <= max_date[month_now]) {
+						if ( col_tbl == 0 ){
+							var hari = "Minggu";
+						} else if ( col_tbl == 1 ){
+							var hari = "Senin";
+						} else if ( col_tbl == 2 ){
+							var hari = "Selasa";
+						} else if ( col_tbl == 3 ){
+							var hari = "Rabu";
+						} else if ( col_tbl == 4 ){
+							var hari = "Kamis";
+						} else if ( col_tbl == 5 ){
+							var hari = "Jumat";
+						} else if ( col_tbl == 6 ){
+							var hari = "Sabtu";
+						} 
+						
+						hijriDate = HijriJS.gregorianToHijri(first_date.getFullYear(), (first_date.getMonth() + 1), no_date);
+						mDateEll = document.querySelector(".tbl-hijr .row-"+ row_tbl +" .col-"+ col_tbl + ' .m-date');
+						hDateEll = document.querySelector(".tbl-hijr .row-"+ row_tbl +" .col-"+ col_tbl + ' .h-date');
+						pasarJava = pasaran(first_date.getFullYear(), (first_date.getMonth()+1), no_date)
+						mDateEll.innerHTML = no_date;
+						hDateEll.innerHTML = convertToArab(''+hijriDate.day+'');
+						
+						var det = document.querySelector(".tbl-hijr .row-"+ row_tbl +" .col-"+ col_tbl + ' .det');
+						
+						var res_hari = hari +' '+ pasarJava;
+						
+						det.innerHTML = "Masehi : "+no_date+" "+bulan[month_now]+" "+year_now+";Hijriyah : "+hijriDate.day+" "+hijri_month[hijriDate.month - 1]+" "+hijriDate.year+" H;Pasaran : "+res_hari+";";
+												
+						//PUASA SENIN KAMIS
+						if(col_tbl == 1 || col_tbl == 4){
+							hDateEll.style.borderTop = "2px solid #ff9800";
+							hDateEll.style.paddingTop = "-2px";
+							
+						}
+						
+						//PUASA AYAMUL BIDH
+						if(hijriDate.day == 13 || hijriDate.day == 14 || hijriDate.day == 15){
+							hDateEll.style.borderTop = "2px solid #673ab7";
+							hDateEll.style.paddingTop = "-2px";
+							det.innerHTML += "Puasa Ayyamul Bidh "+hijriDate.day+" "+hijri_month[hijriDate.month - 1]+" "+hijriDate.year+";";
+						}
+						
+						//PUASA RAMADAN
+						if( hijriDate.month == 9){
+							hDateEll.style.borderTop = "2px solid #76ff03";
+							hDateEll.style.paddingTop = "-2px";
+						}
+						
+						// PUASA ARAFAH
+						if( hijriDate.day == 9 && hijriDate.month == 12){
+							hDateEll.style.borderTop = "2px solid #64b5f6";
+							hDateEll.style.paddingTop = "-2px";
+							det.innerHTML += "Puasa Arafah "+hijriDate.day+" "+hijri_month[hijriDate.month - 1]+" "+hijriDate.year+";";
+						}
+						
+						// PUASA ASYURA
+						if( hijriDate.day == 10 && hijriDate.month == 1){
+							hDateEll.style.borderTop = "2px solid #f06292";
+							hDateEll.style.paddingTop = "-2px";
+							det.innerHTML += "Puasa Asyura "+hijriDate.day+" "+hijri_month[hijriDate.month - 1]+" "+hijriDate.year+";";
+						}
+						
+						// DILARANG PUASA IDUL FITRI
+						if( hijriDate.day == 1 && hijriDate.month == 10){
+							hDateEll.style.borderTop = "2px solid #b71c1c";
+							hDateEll.style.paddingTop = "-2px";
+							det.innerHTML += "Haram berpuasa - Idul Fitri "+hijriDate.day+" "+hijri_month[hijriDate.month - 1]+" "+hijriDate.year+";";
+						}
+						
+						// DILARANG PUASA IDUL ADHA
+						if( hijriDate.day == 10 && hijriDate.month == 12){
+							hDateEll.style.borderTop = "2px solid #b71c1c";
+							hDateEll.style.paddingTop = "-2px";
+							det.innerHTML += "Haram berpuasa - Idul Adha "+hijriDate.day+" "+hijri_month[hijriDate.month - 1]+" "+hijriDate.year+";";
+						}
+						
+						// DILARANG PUASA TASYRIK
+						if( 
+							hijriDate.day == 11 && hijriDate.month == 12 ||
+							hijriDate.day == 12 && hijriDate.month == 12 ||
+							hijriDate.day == 13 && hijriDate.month == 12
+						){
+							hDateEll.style.borderTop = "2px solid #b71c1c";
+							hDateEll.style.paddingTop = "-2px";
+							det.innerHTML += "Haram berpuasa - Hari Tasyrik "+hijriDate.day+" "+hijri_month[hijriDate.month - 1]+" "+hijriDate.year+";";
+						}
+						
+																		 
+						var o = new Date();
+						var d_x = o.getDate();
+						var m_x = o.getMonth();
+						var y_x = o.getFullYear();
+						
+						$(".tbl-hijr .row-"+ row_tbl +" .col-"+ col_tbl).removeClass("blue lighten-5");
+						if ( year_now == y_x && month_now == m_x && no_date == d_x ){
+							$(".tbl-hijr .row-"+ row_tbl +" .col-"+ col_tbl).css("background-color", "#bbdefb");
+						}
+						
+						$(".tbl-hijr .row-"+ row_tbl +" .col-"+ col_tbl + ' .m-date').css("color","");
+						if ( HariLiburNasional[no_date + " " + bulan[month_now]] ){
+							$(".tbl-hijr .row-"+ row_tbl +" .col-"+ col_tbl + ' .m-date').css("color","#f44336 ");
+							det.innerHTML += HariLiburNasional[no_date + " " + bulan[month_now]]+";";
+							$("#harilibur .collection").append("<li class='collection-item'><span class='title'>"+no_date + " " + bulan[month_now]+" : "+HariLiburNasional[no_date + " " + bulan[month_now]]+"</span><a href='#!' class='secondary-content'></a></li>");
+						} else if ( HariLiburIslam[hijriDate.day + " " + java_months[hijriDate.month - 1]] ){
+							$(".tbl-hijr .row-"+ row_tbl +" .col-"+ col_tbl + ' .m-date').css("color","#f44336 ");
+							det.innerHTML += HariLiburIslam[hijriDate.day + " " + java_months[hijriDate.month - 1]]+";";
+							$("#harilibur .collection").append("<li class='collection-item'><span class='title'>"+no_date + " " + bulan[month_now]+" : "+HariLiburIslam[hijriDate.day + " " + java_months[hijriDate.month - 1]]+"</span><a href='#!' class='secondary-content'></a></li>");
+						} else if ( ChineseNewYear.includes(year_now+"-"+String(month_now + 1).padStart(2, '0')+"-"+String(no_date).padStart(2, '0')) ){
+							$(".tbl-hijr .row-"+ row_tbl +" .col-"+ col_tbl + ' .m-date').css("color","#f44336 ");
+							det.innerHTML += "Tahun Baru Imlek;";
+							$("#harilibur .collection").append("<li class='collection-item'><span class='title'>"+no_date + " " + bulan[month_now]+" : Tahun Baru Imlek</span><a href='#!' class='secondary-content'></a></li>");
+						} else if ( HariNyepi.includes(year_now+"-"+String(month_now + 1).padStart(2, '0')+"-"+String(no_date).padStart(2, '0')) ){
+							$(".tbl-hijr .row-"+ row_tbl +" .col-"+ col_tbl + ' .m-date').css("color","#f44336 ");
+							det.innerHTML += "Hari Raya Nyepi;";
+							$("#harilibur .collection").append("<li class='collection-item'><span class='title'>"+no_date + " " + bulan[month_now]+" : Hari Raya Nyepi</span><a href='#!' class='secondary-content'></a></li>");
+						} else if ( JumatAgung.includes(year_now+"-"+String(month_now + 1).padStart(2, '0')+"-"+String(no_date).padStart(2, '0')) ){
+							$(".tbl-hijr .row-"+ row_tbl +" .col-"+ col_tbl + ' .m-date').css("color","#f44336 ");
+							det.innerHTML += "Wafat Isa Al-Masih;";
+							$("#harilibur .collection").append("<li class='collection-item'><span class='title'>"+no_date + " " + bulan[month_now]+" : Wafat Isa Al-Masih</span><a href='#!' class='secondary-content'></a></li>");
+						} else if ( KenaikanIsa.includes(year_now+"-"+String(month_now + 1).padStart(2, '0')+"-"+String(no_date).padStart(2, '0')) ){
+							$(".tbl-hijr .row-"+ row_tbl +" .col-"+ col_tbl + ' .m-date').css("color","#f44336 ");
+							det.innerHTML += "Kenaikan Isa Al-Masih;";
+							$("#harilibur .collection").append("<li class='collection-item'><span class='title'>"+no_date + " " + bulan[month_now]+" : Kenaikan Isa Al-Masih</span><a href='#!' class='secondary-content'></a></li>");
+						}
+					} 
+				no_date++;	
+				col_tbl++;
+				if (col_tbl > 6) {col_tbl = 0; row_tbl++;}
+			}
+				if (row_tbl > 6) {row_tbl = 0};
+		}
+		
+		document.getElementById('setbulan').innerHTML = first_h + ' - '+ last_h;
+
+		if ( $("#harilibur .collection-item").length == 0 ){
+			$("#harilibur .collection").append("<li class='collection-item'><span class='title'>Tidak ada hari libur</span><a href='#!' class='secondary-content'></a></li>");
+		}
+				
+	
+	$("#calendar").slideDown("slow");
+		
+	}
+	
+	function pasaran(y, m, d) {
+	 var pasaran = new Array('Legi','Pahing','Pon','Wage','Kliwon',);
+	 var d2 = new Date("1938/1/1");
+	 var d1 = new Date(y +'/'+ m +'/'+ d);
+	 var selisih = Math.floor(Math.abs(d1-d2)/86400000);
+	 var pasar = pasaran[selisih%5];
+	 return pasar;
+	}
+		
+	function clearAll() {
+		for (var i = 0; i < 6; i++) {
+			for (var j = 0; j < 7; j++) {
+					document.querySelector(".tbl-hijr .row-"+ i +" .col-"+ j).style.background = "white";
+					document.querySelector(".tbl-hijr .row-"+ i +" .col-"+ j + ' .m-date').textContent = '';
+					document.querySelector(".tbl-hijr .row-"+ i +" .col-"+ j + ' .h-date').textContent = '';
+			}
+		}
+	}
+	
+</script>
+
+<script>
+var d 		= new Date();
+var g_month = d.getMonth();
+var g_year 	= d.getFullYear();
+$('#month').text(bulan[g_month]);
+$('#year').text(g_year);
+
+var smonth;
+var xmonth 			= $('#month').text();
+var tahun_terpilih 	= $('#year').text();
+
+$(document).ready(function(){
+	
+	if ( xmonth == "Januari" ){
+		smonth = 0;
+	} else if ( xmonth == "Februari" ){
+		smonth = 1;
+	} else if ( xmonth == "Maret" ){
+		smonth = 2;
+	} else if ( xmonth == "April" ){
+		smonth = 3;
+	} else if ( xmonth == "Mei" ){
+		smonth = 4;
+	} else if ( xmonth == "Juni" ){
+		smonth = 5;
+	} else if ( xmonth == "Juli" ){
+		smonth = 6;
+	} else if ( xmonth == "Agustus" ){
+		smonth = 7;
+	} else if ( xmonth == "September" ){
+		smonth = 8;
+	} else if ( xmonth == "Oktober" ){
+		smonth = 9;
+	} else if ( xmonth == "November" ){
+		smonth = 10;
+	} else if ( xmonth == "Desember" ){
+		smonth = 11;
+	}
+	
+	$("#list-month").val(smonth);
+	$("#list-year").val(parseInt(tahun_terpilih)+1);
+	
+	if ( $("#sc").length < 1 || $("#sc").text() !== "Developed by kenthus" ){
+	    alert('Invalid token!');
+	    return false;
+	}
+	
+	generate_table(smonth, tahun_terpilih);
+});
+
+function prev(){
+	clearAll();
+	if ( xmonth == "Januari" ){
+		document.getElementById('month').innerHTML = bulan[11];
+		document.getElementById('year').innerHTML = parseInt(tahun_terpilih) - 1;
+		smonth 			= 11;
+		xmonth			= bulan[11];
+		tahun_terpilih 	= parseInt(tahun_terpilih) - 1;
+		generate_table(smonth, tahun_terpilih);
+	} else {
+		document.getElementById('month').innerHTML = bulan[smonth - 1];
+		xmonth			= bulan[smonth - 1];
+		smonth 			= smonth - 1;
+		tahun_terpilih 	= tahun_terpilih;
+		generate_table(smonth, tahun_terpilih);
+	}  
+}
+
+function prev_year(){
+	clearAll();
+	document.getElementById('year').innerHTML = parseInt(tahun_terpilih) - 1;
+	smonth 			= smonth;
+	tahun_terpilih 	= parseInt(tahun_terpilih) - 1;
+	generate_table(smonth, tahun_terpilih);
+}
+
+function next(){
+	clearAll();
+	if ( xmonth == "Desember" ){
+		document.getElementById('month').innerHTML = bulan[0];
+		document.getElementById('year').innerHTML = parseInt(tahun_terpilih) + 1;
+		smonth 			= 0;
+		xmonth			= bulan[0];
+		tahun_terpilih 	= parseInt(tahun_terpilih) + 1;
+		generate_table(smonth, tahun_terpilih);
+	} else {
+		document.getElementById('month').innerHTML = bulan[smonth + 1];
+		xmonth			= bulan[smonth + 1];
+		smonth 			= smonth + 1;
+		tahun_terpilih 	= tahun_terpilih;
+		generate_table(smonth, tahun_terpilih);
+	}  
+}
+
+function next_year(){
+	clearAll();
+	document.getElementById('year').innerHTML = parseInt(tahun_terpilih) + 1;
+	smonth 			= smonth;
+	tahun_terpilih 	= parseInt(tahun_terpilih) + 1;
+	generate_table(smonth, tahun_terpilih);
+}
+
+$( "#go_year" ).click(function() {
+	clearAll();
+		var mn = parseInt($("#list-month option:selected").val());
+		var th = parseInt($("#list-year option:selected").val());
+		document.getElementById('month').innerHTML = bulan[mn];
+		document.getElementById('year').innerHTML = th;
+		smonth 			= mn;
+		tahun_terpilih 	= th;
+		generate_table(smonth, tahun_terpilih);
+		$('html, body').animate({
+			scrollTop: $("#hari_ini").offset().top
+		}, 1000);
+});
+
+</script>
+
+<script>
+
+function detail(e) {
+	var c = e.children;
+	var gettext = c[2].textContent;
+	if (gettext !== ""){
+		
+		var xres = gettext.slice(0,-1);
+		var	arrtext = xres.split(";");
+
+		var adettext = "<p><b>Detail :</b></p>";
+
+		for (var q = 0; q < 3; q++){
+			adettext += "<div class='xlist'>"+arrtext[q]+"</div>";
+		}
+		var bdettext = "";
+
+		if ( arrtext.length > 3){
+			bdettext += "<p style='margin: 0px;margin-top:10px;'><b>Lainnya :</b></p>";
+
+			for (var v = 3; v < arrtext.length; v++){
+				bdettext += "<div class='list'>"+arrtext[v]+"</div>";
+			}
+		}
+
+		var dettext = adettext + bdettext;
+
+		$("#textmodal").html(dettext);
+		
+		var z_ctt_month = arrtext[0].replace('Masehi : ','');
+		var q_ctt_month = z_ctt_month.split(" ");
+		ctt_month = q_ctt_month[1];
+		var xctt_month;
+		if ( ctt_month == "Januari" ){
+			xctt_month = "01";
+		} else if ( ctt_month == "Februari" ){
+			xctt_month = "02";
+		} else if ( ctt_month == "Maret" ){
+			xctt_month = "03";
+		} else if ( ctt_month == "April" ){
+			xctt_month = "04";
+		} else if ( ctt_month == "Mei" ){
+			xctt_month = "05";
+		} else if ( ctt_month == "Juni" ){
+			xctt_month = "06";
+		} else if ( ctt_month == "Juli" ){
+			xctt_month = "07";
+		} else if ( ctt_month == "Agustus" ){
+			xctt_month = "08";
+		} else if ( ctt_month == "September" ){
+			xctt_month = "09";
+		} else if ( ctt_month == "Oktober" ){
+			xctt_month = "10";
+		} else if ( ctt_month == "November" ){
+			xctt_month = "11";
+		} else if ( ctt_month == "Desember" ){
+			xctt_month = "12";
+		}
+		
+		var d_n = String(q_ctt_month[0]).padStart(2, '0');
+		
+		var set_ctt_date = q_ctt_month[2] + "-" + xctt_month + "-" + d_n;
+		
+
+		// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+  modal.style.display = "block";
+
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+} 
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+	}
+};
+
+</script>
+	
+<script type="text/javascript">
+function Time() {
+
+  // Creating object of the Date class
+  var date = new Date();
+
+  // Get current hour
+  var hour = date.getHours();
+  // Get current minute
+  var minute = date.getMinutes();
+  // Get current second
+  var second = date.getSeconds();
+
+  // Variable to store Rina / Wengi
+  var period = "";
+
+  // Assigning Rina / Wengi according to current hour
+  if (hour >= 00) {
+      period = "WIB";
+  }
+  if (hour >= 03) {
+      period = "WIB";
+  }
+  if (hour >= 10) {
+      period = "WIB";
+  }
+  if (hour >= 15) {
+      period = "WIB";
+  }
+  if (hour >= 18) {
+      period = "WIB";
+  }
+  if (hour >= 22) {
+      period = "WIB";
+  }
+  if (hour >= 24) {
+      period = "WIB";
+  }
+  // Converting the hour in 12-hour format
+  if (hour == 0) {
+      hour = 24;
+  } else {
+      if (hour > 24) {
+          hour = hour - 24;
+      }
+  }
+
+  // Updating hour, minute, and second
+  // if they are less than 10
+  hour = update(hour);
+  minute = update(minute);
+  second = update(second);
+
+  // Adding time elements to the div
+  document.getElementById("digital-clock").innerText = hour + ":"+ minute +":"+second+" "+ period;
+
+  // Set Timer to 1 sec (1000 ms)
+  setTimeout(Time, 1000);
+}
+
+// Function to update time elements if they are less than 10
+// Append 0 before time elements if they are less than 10
+function update(t) {
+  if (t < 10) {
+    return "0" + t;
+  }
+  else {
+    return t;
+  }
+}
+
+Time();
+</script>
+
+ <script>
+function Time() {
+  var date = new Date();
+  var hour = date.getHours();
+  var minute = date.getMinutes();
+  var second = date.getSeconds();
+  var period = "";
+
+  if (hour >= 00) 
+  if (hour >= 03) 
+  if (hour >= 10) 
+  if (hour >= 15) 
+  if (hour >= 18)
+  if (hour >= 22)
+  if (hour >= 24)
+  if (hour == 0) {
+      hour = 12;
+  } else {
+      if (hour > 12) {
+          hour = hour - 12;
+      }
+  }
+
+  hour = update(hour);
+  minute = update(minute);
+  second = update(second);
+
+  document.getElementById("jam").innerText = hour + ":" + minute + ":" + second + " WIB";
+
+  setTimeout(Time, 1000);
+}
+
+
+function update(t) {
+  if (t < 10) {
+    return "0" + t;
+  }
+  else {
+    return t;
+  }
+}
+
+Time();
+</script>	
+
+</body>
+</html>
